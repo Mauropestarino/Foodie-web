@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <g id="Grupo_9" data-name="Grupo 9" transform="translate(-257 -131)">
+    <circle id="Elipse_3" data-name="Elipse 3" cx="25" cy="25" r="25" transform="translate(257 131)" fill="#e3e7ea"/>
+    <g id="cube-svgrepo-com" transform="translate(269.604 144.205)">
+      <path id="Trazado_154" data-name="Trazado 154" d="M16.2,13.956,5,9.478,16.2,5l11.2,4.478Z" transform="translate(-3.8 -5)" fill="none" stroke="#264e71" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" fill-rule="evenodd"/>
+      <path id="Trazado_155" data-name="Trazado 155" d="M5.9,18.053A1.2,1.2,0,0,0,5,20.281Zm10.75,5.592L16.2,24.759a1.2,1.2,0,0,0,.891,0Zm11.641-3.364a1.2,1.2,0,0,0-.891-2.228ZM5.9,11.336A1.2,1.2,0,0,0,5,13.563Zm10.75,5.592L16.2,18.042a1.2,1.2,0,0,0,.891,0Zm11.641-3.364a1.2,1.2,0,0,0-.891-2.228ZM5,20.281l11.2,4.478.891-2.228L5.9,18.053ZM17.09,24.759l11.2-4.478-.891-2.228L16.2,22.531ZM5,13.563l11.2,4.478.891-2.228L5.9,11.336ZM17.09,18.042l11.2-4.478-.891-2.228L16.2,15.814Z" transform="translate(-4.25 -1.254)" fill="#264e71"/>
+    </g>
+  </g>
+</svg>
