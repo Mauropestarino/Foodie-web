@@ -114,7 +114,6 @@ const WrappedView = () => {
 function App({ instance }) {
   return (
     <BrowserRouter>
-      {/* <MsalProvider instance={instance}>*/}
       <Routes>
         {/* <Route path="" element={<WrappedView />}>
           </Route> */}
@@ -126,7 +125,6 @@ function App({ instance }) {
         <Route path="/email-sended" element={<EmailSended />} />
         <Route path="/account-requested" element={<AccountRequested />} />
       </Routes>
-      {/* </MsalProvider>*/}
     </BrowserRouter>
   );
 }
