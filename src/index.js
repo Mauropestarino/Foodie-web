@@ -6,12 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { PublicClientApplication, EventType } from "@azure/msal-browser";
 import { msalConfig } from "./auth-config";
 
-//Client id google
-//912037462986-vuhp57vv6mlct18e8rfakssodi8mifla.apps.googleusercontent.com
-
-//Client secret
-//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
-
 const msalInstance = new PublicClientApplication(msalConfig);
 if (
   !msalInstance.getActiveAccount() &&

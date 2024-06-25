@@ -31,43 +31,11 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
 
   const matches = useMediaQuery("(min-width:600px)");
 
-  const clientId =
-    "855482831930-vqc2s9g0gq19fgskci2jdl6456vl71g8.apps.googleusercontent.com";
-  const clientSecret = "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";
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-  // let gapiClient = async () =>
-  //   await loadClientAuth2(gapi, clientId, "").then((res) =>
-  //     console.log("gapiClient ", res)
-  //   );
-
-  //Google auth
-  // useEffect(() => {
-  //   // global google
-  //   window.google.accounts.id.initialize({
-  //     client_id:
-  //       "855482831930-vqc2s9g0gq19fgskci2jdl6456vl71g8.apps.googleusercontent.com",
-  //     callback: handleCallbackResponse,
-  //   });
-
-  //   window.google.accounts.id.renderButton(
-  //     document.getElementById("signInDiv"),
-  //     { theme: "outline", size: "large" }
-  //   );
-  // }, []);
-
-  //google auth login
-  async function handleCallbackResponse(response) {
-    // console.log("Encoded JWT ID token: " + response.credential);
-    var userObject = jwtDecode(response.credential);
-    // console.log("userObject ", userObject.email);
-    await isAUser(userObject.email, response.credential);
-  }
 
   const isValidInput = (typeInput) => {
     isInputEmailOk(typeInput);
