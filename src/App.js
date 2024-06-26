@@ -22,7 +22,6 @@ const api = new FoodieBackendApi();
 
 const WrappedView = () => {
   var navigate = useNavigate();
-  //msal
   const { instance } = useMsal();
   const activeAccount = instance.getActiveAccount();
   const [loginToken, setLoginToken] = useState("");
@@ -30,16 +29,18 @@ const WrappedView = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("loginToken");
-    if (token) {
+    console.log("Adento del useEffect");
+    console.log(`${token}`);
+    if (token) {    
       setLoginToken(token);
       setIsAuthenticated(true);
-      navigate("/");
+      navigate("/home");
     } else {
       setIsAuthenticated(false);
       navigate("/login");
       setLoginToken("");
     }
-  }, [loginToken, navigate]);
+  }, [navigate]);
 
   const handleRedirect = async () => {
     instance
@@ -63,7 +64,7 @@ const WrappedView = () => {
       instance.logoutPopup();
     }
     navigate("/login");
-    console.log("token localstorage ", localStorage.getItem("loginToken"));
+    console.log("token localstorage borrado", localStorage.getItem("loginToken"));
   };
 
   const onSuccess = () => {
@@ -72,40 +73,39 @@ const WrappedView = () => {
 
   return (
     <div className="App">
-      {/*loginToken != "" ? (
+      {isAuthenticated ? (
         <Main handleLogout={handleLogout} />
       ) : (
         <Login
           handleRedirect={handleRedirect}
           setLoginToken={setLoginToken}
-          isAUser={isAUser}
+          //isAUser={isAUser}
         />
-      )*/}
-      <Login
-        handleRedirect={handleRedirect}
-        setLoginToken={setLoginToken}
-        //isAUser={isAUser}
-      />
+      )}
     </div>
   );
 };
 
-function App({ instance }) {
+function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<WrappedView />} />
-        <Route path="/" element={<Main />} />
-        <Route path="/request-account" element={<RequestAccount />} />
-        <Route path="/reset-password" element={<RecoverPassword />} />
-        <Route path="/insert-email" element={<PutEmailToRecoverPass />} />
-        <Route path="/email-sended" element={<EmailSended />} />
-        <Route path="/account-requested" element={<AccountRequested />} />
+        <Route path="/" element={<WrappedView />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Main />} />
+        
       </Routes>
     </BrowserRouter>
   );
 }
 
-
 export default App;
 export { api };
+
+/*
+        <Route path="/request-account" element={<RequestAccount />} />
+        <Route path="/reset-password" element={<RecoverPassword />} />
+        <Route path="/insert-email" element={<PutEmailToRecoverPass />} />
+        <Route path="/email-sended" element={<EmailSended />} />
+        <Route path="/account-requested" element={<AccountRequested />} />
+*/

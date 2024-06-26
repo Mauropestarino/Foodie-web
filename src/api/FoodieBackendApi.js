@@ -1,37 +1,72 @@
 import appsettings from "../appsettings.json";
 
 export default class FoodieBackendApi {
-  constructor() {
-    this.headers = {
-      "Content-Type": "application/json",
-    };
-  }
 
   async getApiUrl() {
-    var host = window.location.hostname;
-    //Desarrollo
     return "http://localhost:8080/api";
-    //Produccion
-    // return `${appsettings.host}/api`;
+  }
+
+  setAuthToken(token) {
+    this.headers["authorization"] = token;
   }
 
   async login(body) {
     const request = fetch((await this.getApiUrl()) + "/usuarios/login", {
       method: "POST",
-      headers: this.headers,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(body),
     });
     return request;
   }
 
-  async isLogged(email) {
-    const request = fetch(
-      (await this.getApiUrl()) + `/user/is-logged?email=${email}`,
-      {
-        method: "GET",
-        headers: this.headers,
-      }
-    );
+  async favoritasRecetas(body) {
+    const request = fetch((await this.getApiUrl()) + "/recetas/favoritas", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("loginToken")
+      },
+      body: JSON.stringify(body),
+    });
     return request;
   }
+
+  async creadasRecetas(body) {
+    const request = fetch((await this.getApiUrl()) + "/recetas/creadas", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("loginToken")
+      },
+      body: JSON.stringify(body),
+    });
+    return request;
+  }
+
+  async historialRecetas(body) {
+    const request = fetch((await this.getApiUrl()) + "/recetas/historial", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("loginToken")
+      },
+      body: JSON.stringify(body),
+    });
+    return request;
+  }
+
+  async ingredientesStock(body) {
+    const request = fetch((await this.getApiUrl()) + "/stock/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("loginToken")
+      },
+      body: JSON.stringify(body),
+    });
+    return request;
+  }
+  
 }
