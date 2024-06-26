@@ -85,8 +85,8 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
           .login(loginInfo)
           .then((res) => res.json())
           .then((result) => {
-            if (result.ok) {
-              localStorage.setItem("loginToken", result.token);
+            if (result.auth) {
+              localStorage.setItem("loginToken", `Bearer ${result.token}`);
               navigate("/");
             }
           });
@@ -174,7 +174,7 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
             disabled={error.emailError != "" || error.passwordError != ""}
             onClick={loginWithEmail}
           >
-            Continuar con email
+            Iniciar sesión
           </Button>
         </Box>
       </Grid>

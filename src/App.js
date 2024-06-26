@@ -12,13 +12,13 @@ import { loginRequest } from "./auth-config";
 import Login from "./screens/Login";
 import RecoverPassword from "./screens/RecoverPassword";
 import PutEmailToRecoverPass from "./screens/PutEmailToRecoverPass";
-import LicenseManagerApi from "./api/LicenseManagerApi";
+import FoodieBackendApi from "./api/FoodieBackendApi";
 import EmailSended from "./screens/EmailSended";
 import RequestAccount from "./screens/RequestAccount";
 import AccountRequested from "./screens/AccountRequested";
 import Main from "./screens/Main";
 
-const api = new LicenseManagerApi();
+const api = new FoodieBackendApi();
 
 const WrappedView = () => {
   var navigate = useNavigate();
@@ -30,37 +30,16 @@ const WrappedView = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("loginToken");
-    // console.log("token ", token);
-    // console.log("verifyToken ", token != "" ? verifyToken(token) : null);
     if (token) {
-      // if (!verifyToken(token)) {
-      //   navigate("/login");
-      // }
       setLoginToken(token);
-      // setIsAuthenticated(isTokenValid);
+      setIsAuthenticated(true);
+      navigate("/");
     } else {
+      setIsAuthenticated(false);
+      navigate("/login");
       setLoginToken("");
     }
-  }, [loginToken]);
-
-  // const verifyToken = (token) => {
-  //   var userObject = jwtDecode(token);
-  //   console.log("userObject ", userObject);
-  // };
-
-  async function isAUser(email, token) {
-    await api
-      .isLogged(email)
-      .then((res) => {
-        console.log("responseeeee ", res);
-        if (res.ok) {
-          localStorage.setItem("loginToken", token);
-          setLoginToken(token);
-        }
-        console.log(res);
-      })
-      .catch((error) => console.log("Error: ", error));
-  }
+  }, [loginToken, navigate]);
 
   const handleRedirect = async () => {
     instance
@@ -71,7 +50,7 @@ const WrappedView = () => {
       .then((response) => {
         var userObject = jwtDecode(response.accessToken);
         console.log("userObject ", userObject.unique_name);
-        isAUser(userObject.unique_name, response.accessToken);
+        //isAUser(userObject.unique_name, response.accessToken);
         // localStorage.setItem("loginToken", response.accessToken);
       })
       .catch((error) => console.log(error));
@@ -105,7 +84,7 @@ const WrappedView = () => {
       <Login
         handleRedirect={handleRedirect}
         setLoginToken={setLoginToken}
-        isAUser={isAUser}
+        //isAUser={isAUser}
       />
     </div>
   );
@@ -115,8 +94,6 @@ function App({ instance }) {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="" element={<WrappedView />}>
-          </Route> */}
         <Route path="/login" element={<WrappedView />} />
         <Route path="/" element={<Main />} />
         <Route path="/request-account" element={<RequestAccount />} />
@@ -128,6 +105,7 @@ function App({ instance }) {
     </BrowserRouter>
   );
 }
+
 
 export default App;
 export { api };

@@ -106,9 +106,9 @@ export default function Main({ handleLogout }) {
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: `calc(${theme.spacing(7)} + 7px)`,
+    width: `calc(${theme.spacing(7)} + 10px)`,
     [theme.breakpoints.up("sm")]: {
-      width: `calc(${theme.spacing(8)} + 7px)`,
+      width: `calc(${theme.spacing(8)} + 10px)`,
     },
   });
 
@@ -118,21 +118,19 @@ export default function Main({ handleLogout }) {
 
   const drawerOptions = [
     {
-      text: "Recetas",
-      icon: RecipeIcon,
-      show: true,
-    },
-    {
       text: "Favoritas",
       icon: FavoriteIcon,
+      show: true,
     },
     {
       text: "Creadas",
       icon: EditIcon,
+      show: true,
     },
     {
       text: "Historial",
       icon: HistoryIcon,
+      show: true,
     },
     {
       text: "Stock",
@@ -177,8 +175,8 @@ export default function Main({ handleLogout }) {
                   <ListItemIcon>
                     <img
                       src={option.icon}
-                      width={40}
-                      height={30}
+                      width={55}
+                      height={55}
                       alt={option.text}
                     />
                   </ListItemIcon>
@@ -188,6 +186,7 @@ export default function Main({ handleLogout }) {
                     sx={{
                       fontWeight: option.show ? "bold" : "normal",
                       color: "#7B5FF1",
+                      paddingLeft: "20px"
                     }}
                   />
                 </ListItemButton>
@@ -245,15 +244,6 @@ export default function Main({ handleLogout }) {
         </TabPanel>
         <TabPanel value={value} index={3}>
           -33333333333333333333333333333333333333333333333333333
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          -444444444444444444444444444444444444444444444444444444444444444444
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          -55555
-        </TabPanel>
-        <TabPanel value={value} index={6}>
-          -666666
         </TabPanel>
       </MainBox>
     </Grid>
