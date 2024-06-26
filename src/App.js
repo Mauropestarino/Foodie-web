@@ -10,12 +10,8 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { loginRequest } from "./auth-config";
 import Login from "./screens/Login";
-import RecoverPassword from "./screens/RecoverPassword";
-import PutEmailToRecoverPass from "./screens/PutEmailToRecoverPass";
 import FoodieBackendApi from "./api/FoodieBackendApi";
-import EmailSended from "./screens/EmailSended";
-import RequestAccount from "./screens/RequestAccount";
-import AccountRequested from "./screens/AccountRequested";
+import CreateAccount from "./screens/CreateAccount";
 import Main from "./screens/Main";
 
 const api = new FoodieBackendApi();
@@ -93,7 +89,7 @@ function App() {
         <Route path="/" element={<WrappedView />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Main />} />
-        
+        <Route path="/registrarme" element={<CreateAccount />}/>
       </Routes>
     </BrowserRouter>
   );
@@ -103,7 +99,7 @@ export default App;
 export { api };
 
 /*
-        <Route path="/request-account" element={<RequestAccount />} />
+         />
         <Route path="/reset-password" element={<RecoverPassword />} />
         <Route path="/insert-email" element={<PutEmailToRecoverPass />} />
         <Route path="/email-sended" element={<EmailSended />} />

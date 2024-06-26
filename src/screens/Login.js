@@ -113,7 +113,7 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
         <Box sx={alignRight}>
           <Typography sx={title}>¡Bienvenido a nuestro portal!</Typography>
           <Typography sx={text}>
-            Inicia sesión para acceder a contenido exclusivo para ti.
+            Inicia sesión para visualizar tu stock y tus recetas.
           </Typography>
         </Box>
       </Grid>
@@ -160,11 +160,7 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
               {error.passwordError}
             </FormHelperText>
           </FormControl>
-          {/* <Link to="/insert-email" style={{ textDecoration: "none" }}> */}
-          <Typography sx={[input, forgetPasswordText]} onClick={forgotPassword}>
-            ¿Olvidaste tu contraseña?
-          </Typography>
-          {/* </Link> */}
+
           <Button
             sx={
               error.emailError != "" || error.passwordError != ""
@@ -187,9 +183,9 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
               cursor: "pointer",
             },
           }}
-          onClick={() => navigate("/request-account")}
+          onClick={() => navigate("/registrarme")}
         >
-          Solicita tu cuenta aquí
+          Crear una cuenta
         </Typography>
       </Grid>
     </Grid>

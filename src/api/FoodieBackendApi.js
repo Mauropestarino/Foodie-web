@@ -21,6 +21,18 @@ export default class FoodieBackendApi {
     return request;
   }
 
+  
+  async createUser(body) {
+    const request = fetch((await this.getApiUrl()) + "/usuarios/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    return request;
+  }
+
   async favoritasRecetas(body) {
     const request = fetch((await this.getApiUrl()) + "/recetas/favoritas", {
       method: "GET",

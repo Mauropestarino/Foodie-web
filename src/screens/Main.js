@@ -19,6 +19,7 @@ import FavoriteIcon from "../assets/favorite.svg";
 import StockIcon from "../assets/stock.svg";
 import EditIcon from "../assets/edit.svg";
 import HistoryIcon from "../assets/history.svg";
+import LogoutIcon from "../assets/ic_logout.svg";
 import { useState, useEffect } from "react";
 import RecetaCard from '../components/RecetaCard';
 import StockCard from '../components/StockCard';
@@ -152,7 +153,31 @@ export default function Main({ handleLogout }) {
 
   const drawer = (
     <Box sx={containerDrawer}>
-      <Toolbar />
+      <Toolbar sx={{ paddingLeft: 0, paddingRight: 0 }}>
+        <ListItemButton
+          onClick={() => {
+            localStorage.removeItem('loginToken');
+            window.location.href = '/login';
+          }}
+          sx={{
+            paddingLeft: '0px',
+            justifyContent: 'flex-start'
+           }}
+        >
+        <ListItemIcon>
+          <img src={LogoutIcon} alt="CERRAR SESIÓN" width={55} height={55} />
+        </ListItemIcon>
+          <ListItemText
+          primary="CERRAR SESIÓN"
+          disableTypography
+            sx={{
+              fontWeight: "normal",
+              color: "#7B5FF1",
+              paddingLeft: "20px"
+            }}         
+          />
+        </ListItemButton>
+      </Toolbar>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -217,21 +242,21 @@ export default function Main({ handleLogout }) {
           }
         }}>
           {openDrawer ? (
-            <ListItemIcon>
-              <KeyboardDoubleArrowLeftIcon
-                sx={{ color: "#7B5FF1", paddingLeft: 1 }}
-              />
-            </ListItemIcon>
-          ) : (
-            <ListItemIcon>
-              <KeyboardDoubleArrowRightIcon
-                sx={{ color: "#7B5FF1", paddingLeft: 1 }}
-              />
-            </ListItemIcon>
-          )}
-        </ListItemButton>
-      </ListItem>
-    </Box>
+              <ListItemIcon onClick={() => toggleDrawer(false)}>
+                <KeyboardDoubleArrowLeftIcon
+                  sx={{ color: "#7B5FF1", paddingLeft: 1 }}
+                />
+              </ListItemIcon>
+            ) : (
+              <ListItemIcon onClick={() => toggleDrawer(true)}>
+                <KeyboardDoubleArrowRightIcon
+                  sx={{ color: "#7B5FF1", paddingLeft: 1 }}
+                />
+              </ListItemIcon>
+            )}
+          </ListItemButton>
+        </ListItem>
+      </Box>
     </Box>
   );
 
