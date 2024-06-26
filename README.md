@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Foodie - página web
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descripción
+Esta es una aplicación web que permite a los usuarios gestionar recetas. Los usuarios pueden registrarse, iniciar sesión, y ver sus recetas favoritas, recetas creadas, historial de recetas y productos en stock. La aplicación se conecta con un backend para funcionar correctamente.
 
-## Available Scripts
+## Características
+**Registro de Usuario**: Los usuarios pueden crear una cuenta proporcionando su información personal.
+**Inicio de Sesión**: Los usuarios registrados pueden iniciar sesión en la aplicación.
+**Recetas Favoritas**: Los usuarios pueden ver una lista de sus recetas favoritas.
+**Recetas Creadas**: Los usuarios pueden ver una lista de las recetas que han creado.
+**Historial de Recetas**: Los usuarios pueden ver el historial de recetas que han visto.
+**Productos en Stock**: Los usuarios pueden ver una lista de productos en stock.
 
-In the project directory, you can run:
+## Requisitos
+Node.js
+Un backend en funcionamiento
 
-### `npm start`
+## Instalación
+### Clona el repositorio:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+git clone https://github.com/Mauropestarino/Foodie-web.git
+cd Foodie-web
+### Instala las dependencias:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+npm install
+### Inicia la aplicación:
 
-### `npm test`
+npm start
+La aplicación debería estar corriendo en http://localhost:3000
+## Uso
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Registrar (Crear Usuario):
 
-### `npm run build`
+Ve a la página de registro.
+Completa el formulario con tu información personal.
+Haz clic en "Registrarme".
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Iniciar Sesión:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ve a la página de inicio de sesión.
+Introduce tu email y contraseña.
+Haz clic en "Iniciar sesión".
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Ver tus Recetas Favoritas:
 
-### `npm run eject`
+Navega a la sección de recetas favoritas desde el menú.
+Verás una lista de tus recetas favoritas.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Ver tus Recetas Creadas:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Navega a la sección de recetas creadas desde el menú.
+Verás una lista de las recetas que has creado.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Ver tu Historial de Recetas:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Navega a la sección de historial de recetas desde el menú.
+Verás un historial de las recetas que has visto.
 
-## Learn More
+### Ver tus Productos en Stock:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Navega a la sección de productos en stock desde el menú.
+Verás una lista de productos en stock.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Backend
+Para que la aplicación web funcione correctamente, es necesario tener el backend en funcionamiento.
+Sigue las instrucciones en el repositorio del backend (https://github.com/Mauropestarino/Foodie-back) para configurarlo y ejecutarlo.
 
-### Code Splitting
+## Autores
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Ona Loré (https://github.com/onalore)
+- Nicolás Giudice (https://github.com/nicogiu)
+- Mauro Pestarino (https://github.com/mauropestarino)
+- Mauricio La Rotonda(https://github.com/mlarotonda)
