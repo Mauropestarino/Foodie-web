@@ -85,8 +85,8 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
           .login(loginInfo)
           .then((res) => res.json())
           .then((result) => {
-            if (result.ok) {
-              localStorage.setItem("loginToken", result.token);
+            if (result.auth) {
+              localStorage.setItem("loginToken", `Bearer ${result.token}`);
               navigate("/");
             }
           });
@@ -113,7 +113,7 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
         <Box sx={alignRight}>
           <Typography sx={title}>¡Bienvenido a nuestro portal!</Typography>
           <Typography sx={text}>
-            Inicia sesión para acceder a contenido exclusivo para ti.
+            Inicia sesión para visualizar tu stock y tus recetas.
           </Typography>
         </Box>
       </Grid>
@@ -160,11 +160,7 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
               {error.passwordError}
             </FormHelperText>
           </FormControl>
-          {/* <Link to="/insert-email" style={{ textDecoration: "none" }}> */}
-          <Typography sx={[input, forgetPasswordText]} onClick={forgotPassword}>
-            ¿Olvidaste tu contraseña?
-          </Typography>
-          {/* </Link> */}
+
           <Button
             sx={
               error.emailError != "" || error.passwordError != ""
@@ -174,7 +170,7 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
             disabled={error.emailError != "" || error.passwordError != ""}
             onClick={loginWithEmail}
           >
-            Continuar con email
+            Iniciar sesión
           </Button>
         </Box>
       </Grid>
@@ -187,9 +183,9 @@ export default function Login({ handleRedirect, setLoginToken, isAUser }) {
               cursor: "pointer",
             },
           }}
-          onClick={() => navigate("/request-account")}
+          onClick={() => navigate("/registrarme")}
         >
-          Solicita tu cuenta aquí
+          Crear una cuenta
         </Typography>
       </Grid>
     </Grid>

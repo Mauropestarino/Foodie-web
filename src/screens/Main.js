@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import MuiDrawer from "@mui/material/Drawer";
@@ -18,9 +17,16 @@ import logo from "../assets/foodie-logo.png";
 import ortLogo from "../assets/ort-logo.jpeg";
 import FavoriteIcon from "../assets/favorite.svg";
 import StockIcon from "../assets/stock.svg";
-import RecipeIcon from "../assets/recipe.svg";
 import EditIcon from "../assets/edit.svg";
 import HistoryIcon from "../assets/history.svg";
+import LogoutIcon from "../assets/ic_logout.svg";
+import { useState, useEffect } from "react";
+import RecetaCard from '../components/RecetaCard';
+import StockCard from '../components/StockCard';
+import FoodieBackendApi from '../api/FoodieBackendApi';
+import Masonry from 'react-masonry-css';
+
+const api = new FoodieBackendApi();
 
 const drawerWidth = 250;
 
@@ -33,13 +39,13 @@ const MainBox = styled("main", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  marginLeft: `-${drawerWidth}px`,
+  marginLeft: `calc(${theme.spacing(7)} + 10px)`,
   ...(open && {
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: 0,
+    marginLeft: drawerWidth,
   }),
 }));
 
@@ -64,8 +70,14 @@ function TabPanel(props) {
 }
 
 export default function Main({ handleLogout }) {
+
   const [openDrawer, setOpenDrawer] = useState(false);
   const [value, setValue] = useState(false);
+  const [favoritas, setFavoritas] = useState([]);
+  const [creadas, setCreadas] = useState([]);
+  const [historial, setHistorial] = useState([]);
+  const [stock, setStock] = useState([]);
+
 
   const matches = useMediaQuery("(min-width:600px)");
 
@@ -106,9 +118,9 @@ export default function Main({ handleLogout }) {
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: `calc(${theme.spacing(7)} + 7px)`,
+    width: `calc(${theme.spacing(7)} + 10px)`,
     [theme.breakpoints.up("sm")]: {
-      width: `calc(${theme.spacing(8)} + 7px)`,
+      width: `calc(${theme.spacing(8)} + 10px)`,
     },
   });
 
@@ -118,21 +130,19 @@ export default function Main({ handleLogout }) {
 
   const drawerOptions = [
     {
-      text: "Recetas",
-      icon: RecipeIcon,
-      show: true,
-    },
-    {
       text: "Favoritas",
       icon: FavoriteIcon,
+      show: true,
     },
     {
       text: "Creadas",
       icon: EditIcon,
+      show: true,
     },
     {
       text: "Historial",
       icon: HistoryIcon,
+      show: true,
     },
     {
       text: "Stock",
@@ -143,7 +153,31 @@ export default function Main({ handleLogout }) {
 
   const drawer = (
     <Box sx={containerDrawer}>
-      <Toolbar />
+      <Toolbar sx={{ paddingLeft: 0, paddingRight: 0 }}>
+        <ListItemButton
+          onClick={() => {
+            localStorage.removeItem('loginToken');
+            window.location.href = '/login';
+          }}
+          sx={{
+            paddingLeft: '0px',
+            justifyContent: 'flex-start'
+           }}
+        >
+        <ListItemIcon>
+          <img src={LogoutIcon} alt="CERRAR SESIÓN" width={55} height={55} />
+        </ListItemIcon>
+          <ListItemText
+          primary="CERRAR SESIÓN"
+          disableTypography
+            sx={{
+              fontWeight: "normal",
+              color: "#7B5FF1",
+              paddingLeft: "20px"
+            }}         
+          />
+        </ListItemButton>
+      </Toolbar>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -173,12 +207,12 @@ export default function Main({ handleLogout }) {
                   : { alignItems: "start", padding: 0, margin: 0 }
               }
               label={
-                <ListItemButton>
+                <ListItemButton onClick={() => toggleDrawer(true)}>
                   <ListItemIcon>
                     <img
                       src={option.icon}
-                      width={40}
-                      height={30}
+                      width={55}
+                      height={55}
                       alt={option.text}
                     />
                   </ListItemIcon>
@@ -188,6 +222,7 @@ export default function Main({ handleLogout }) {
                     sx={{
                       fontWeight: option.show ? "bold" : "normal",
                       color: "#7B5FF1",
+                      paddingLeft: "20px"
                     }}
                   />
                 </ListItemButton>
@@ -197,9 +232,16 @@ export default function Main({ handleLogout }) {
         )}
       </Tabs>
       <Box sx={{ marginBottom: "1vh" }}>
-        <ListItem disablePadding>
-          <ListItemButton>
-            {openDrawer ? (
+      <ListItem disablePadding>
+        <ListItemButton onClick={() => {
+          if (openDrawer) {
+            toggleDrawer(false);
+            setValue(false); // Cambia a la pantalla original del home
+          } else {
+            toggleDrawer(true);
+          }
+        }}>
+          {openDrawer ? (
               <ListItemIcon onClick={() => toggleDrawer(false)}>
                 <KeyboardDoubleArrowLeftIcon
                   sx={{ color: "#7B5FF1", paddingLeft: 1 }}
@@ -218,6 +260,43 @@ export default function Main({ handleLogout }) {
     </Box>
   );
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try { 
+        // Fetching favoritas recetas
+        const favoritasResponse = await api.favoritasRecetas();
+        const favoritasData = await favoritasResponse.json();
+        setFavoritas(favoritasData.recetas || []);
+        
+        // Fetching creadas recetas
+        const creadasResponse = await api.creadasRecetas();
+        const creadasData = await creadasResponse.json();
+        setCreadas(creadasData.recetas || []);
+  
+        // Fetching historial recetas
+        const historialResponse = await api.historialRecetas();
+        const historialData = await historialResponse.json();
+        setHistorial(historialData.recetas || []);
+  
+        // Fetching ingredientes stock
+        const stockResponse = await api.ingredientesStock();
+        const stockData = await stockResponse.json();
+        setStock(stockData || []);
+      } catch (error) {
+        console.error("Error cargando la informacion:", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+
+  const breakpointColumnsObj = {
+    default: 3,
+    1100: 2,
+    700: 1
+  };
+
+
   return (
     <Grid container>
       <Drawer variant="permanent" open={openDrawer}>
@@ -235,25 +314,69 @@ export default function Main({ handleLogout }) {
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={0}>
-          -00000000000000000000000000000000000000000000000000000000000
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {favoritas.map((receta, index) => (
+              <RecetaCard
+                key={index}
+                image={receta.imageUrl} 
+                title={receta.name} 
+                ingredients={receta.ingredients}
+                steps={receta.steps}  
+              />
+            ))}
+          </Masonry>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          -111111111111111111111111111111111111111111111111111111111111111
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {creadas.map((receta, index) => (
+              <RecetaCard
+                key={index}
+                image={receta.imageUrl} 
+                title={receta.name} 
+                ingredients={receta.ingredients}
+                steps={receta.steps}  
+              />
+            ))}
+          </Masonry>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          -222222222222222222222222222222222222222222222222222222222222222222222222
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {historial.map((receta, index) => (
+              <RecetaCard
+                key={index}
+                image={receta.imageUrl} 
+                title={receta.name} 
+                ingredients={receta.ingredients}
+                steps={receta.steps}  
+              />
+            ))}
+          </Masonry>
         </TabPanel>
         <TabPanel value={value} index={3}>
-          -33333333333333333333333333333333333333333333333333333
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          -444444444444444444444444444444444444444444444444444444444444444444
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          -55555
-        </TabPanel>
-        <TabPanel value={value} index={6}>
-          -666666
+          <Grid container spacing={2}>
+            {stock.map((ingrediente, index) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index}> {/* xs=12, sm=6, md=4, lg=3 asegura 4 tarjetas por fila */}
+                <StockCard
+                  image={ingrediente.imageUrl}
+                  name={ingrediente.id}
+                  quantity={ingrediente.cantidad} // Asegúrate de que el nombre de la propiedad coincida
+                  unit={ingrediente.unidadMedida} // Asegúrate de que el nombre de la propiedad coincida
+                />
+              </Grid>
+            ))}
+          </Grid>
         </TabPanel>
       </MainBox>
     </Grid>

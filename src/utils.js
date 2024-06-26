@@ -8,7 +8,7 @@ function isValidEmail(email) {
 
 function isValidPassword(password) {
   // Verifica si la longitud de la contraseña es al menos 8 caracteres
-  return password.length >= 8;
+  return password.length >= 3;
 }
 
 function isNotEmptyString(value) {
