@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <g id="Grupo_9" data-name="Grupo 9" transform="translate(-257 -131)">
+    <circle id="Elipse_3" data-name="Elipse 3" cx="25" cy="25" r="25" transform="translate(257 131)" fill="#e4e7ea"/>
+    <path id="Trazado_146" data-name="Trazado 146" d="M5.817,23.523a1.067,1.067,0,1,0,0,2.134Zm19.494,2.134a1.067,1.067,0,0,0,0-2.134Zm-6.2-19.239a1.067,1.067,0,0,0-1.979.8Zm4.331,4.908a1.067,1.067,0,1,0-.47-2.082ZM5.817,25.658H25.311V23.523H5.817ZM17.136,7.218a8.121,8.121,0,0,0,2.023,2.89,4.744,4.744,0,0,0,4.287,1.22l-.47-2.082a2.619,2.619,0,0,1-2.4-.733,5.993,5.993,0,0,1-1.462-2.093Z" transform="translate(266.25 141.74)" fill="#264e71"/>
+    <path id="Trazado_145" data-name="Trazado 145" d="M20.732,4.231,23.5,6.483a1.373,1.373,0,0,1-.011,1.978l-2.1,2.561-7.157,8.732a.909.909,0,0,1-.477.295L10.04,20.9a.941.941,0,0,1-.973-.832l.174-3.661a.854.854,0,0,1,.211-.505L16.3,7.559l2.412-2.943A1.511,1.511,0,0,1,20.732,4.231Z" transform="translate(268.076 141)" fill="none" stroke="#264e71" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" fill-rule="evenodd"/>
+  </g>
+</svg>
